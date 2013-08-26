@@ -8,12 +8,38 @@ Express
   - [![Coverage Status](https://coveralls.io/repos/krainboltgreene/express/badge.png?branch=master)](https://coveralls.io/r/krainboltgreene/express)
 
 
-TODO: Write a gem description
+**NOTE**: This is not the [bvision/express](https://github.com/bvision/express) for slim rails packages!
+
+The express gem is another take at the concept of ["Verbal Expressions"]() in Ruby.
+
 
 Using
 =====
 
-TODO: Write usage instructions here
+``` ruby
+require "express"
+
+pattern = Express.new.
+  starting.
+  with("http").
+  maybe("s").
+  then("://").
+  maybe { words.with(".") }.
+  find { matching { [word, "-"] }.multiple }.
+  then(".").
+  either("com", "org").
+  maybe("/").
+  ending
+```
+
+After requiring express you'll have access to the Express class, which allows you to chain methods to build up a regex pattern.
+
+You can see this pattern by calling either `Express#to_s` or `Express#to_r`:
+
+``` ruby
+pattern.to_s #=> "^http(?:s)?://(?:\\w+\\.)?([\\w\\-]+)\\.(?:com|org)(?:/)?$"
+pattern.to_r #=> /^http(?:s)?:\/\/(?:\w+\.)?([\w\-]+)\.(?:com|org)(?:\/)?$/
+```
 
 
 Installing
@@ -21,7 +47,7 @@ Installing
 
 Add this line to your application's Gemfile:
 
-    gem 'express'
+    gem "express", "~> 1.0"
 
 And then execute:
 
@@ -30,6 +56,7 @@ And then execute:
 Or install it yourself as:
 
     $ gem install express
+
 
 Contributing
 ============
