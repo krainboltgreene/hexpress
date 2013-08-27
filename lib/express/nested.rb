@@ -1,19 +1,38 @@
-require_relative "nested/find"
-require_relative "nested/matching"
 class Express
+  private
+
+  def add_nested(expression, &block)
+    tap do
+      @expressions << expression.new(&block)
+    end
+  end
+
   module Nested
-    attr_reader :open, :close
+    include Wrapped
 
     def delimiter
       @delimiter || ""
     end
 
     def expression
-      @expression.respond_to?(:join) ? @expression.join(delimiter) : @expression
+      if joinable? then join_expression else @expression end
     end
 
     def to_s
-      "#{open}#{expression}#{close}"
+      wrapping(expression)
+    end
+
+    private
+
+    def join_expression
+      @expression.join(delimiter)
+    end
+
+    def joinable?
+      @expression.respond_to?(:join)
     end
   end
 end
+
+require_relative "nested/find"
+require_relative "nested/matching"

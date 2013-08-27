@@ -1,10 +1,10 @@
 class Express
-  # def except(value)
-  #   add(Except, value)
-  # end
-  # alias_method :excluding, :except
-  # alias_method :exclude, :except
-  # alias_method :without, :except
+  def except(value)
+    add_value(Value::Except, value)
+  end
+  alias_method :excluding, :except
+  alias_method :exclude, :except
+  alias_method :without, :except
 
   module Value
     class Except

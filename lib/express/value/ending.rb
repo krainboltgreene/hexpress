@@ -1,9 +1,10 @@
 class Express
-  # def ending(value = nil)
-  #   add(Ending, value)
-  # end
-  # alias_method :ending_with, :ending
-  # alias_method :finally, :ending
+  def ending(value = nil)
+    add_value(Value::Ending, value)
+  end
+  alias_method :ending_with, :ending
+  alias_method :finally, :ending
+  alias_method :endOfLine, :ending
 
   module Value
     class Ending
@@ -14,7 +15,7 @@ class Express
       end
 
       def to_s
-        "#{value}^"
+        "#{value}$"
       end
     end
   end

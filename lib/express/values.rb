@@ -1,7 +1,8 @@
-require_relative "values/either"
-require_relative "values/range"
-
 class Express
+  def add_values(expression, *vs)
+    add(expression.new(*vs))
+  end
+
   module Values
     attr_reader :delimiter
 
@@ -14,3 +15,6 @@ class Express
     end
   end
 end
+
+require_relative "values/either"
+require_relative "values/range"

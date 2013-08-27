@@ -1,10 +1,10 @@
 class Express
-  # def with(value)
-  #   add(With, value)
-  # end
-  # alias_method :has, :with
-  # alias_method :then, :with
-  # alias_method :including, :with
+  def with(value)
+    add_value(Value::With, value)
+  end
+  alias_method :has, :with
+  alias_method :then, :with
+  alias_method :including, :with
 
   module Value
     class With

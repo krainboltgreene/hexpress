@@ -1,10 +1,11 @@
 class Express
-  # def starting(value = nil)
-  #   add(Start, value)
-  # end
-  # alias_method :begins, :starting
-  # alias_method :begin, :starting
-  # alias_method :start, :starting
+  def starting(value = nil)
+    add_value(Value::Starting, value)
+  end
+  alias_method :begins, :starting
+  alias_method :begin, :starting
+  alias_method :start, :starting
+  alias_method :startOfLine, :starting
 
   module Value
     class Starting
@@ -15,7 +16,7 @@ class Express
       end
 
       def to_s
-        "$#{value}"
+        "^#{value}"
       end
     end
   end

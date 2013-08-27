@@ -1,32 +1,55 @@
-require_relative "express/version"
-require_relative "express/value"
-require_relative "express/values"
-require_relative "express/nested"
-
 class Express
+  CHARACTERS = [:word, :digit, :space]
   def initialize
     @expressions = []
   end
 
   def word
-    '\w'
+    add(Character.new(:word))
   end
 
   def digit
-    '\d'
+    add(Character.new(:digit))
   end
 
   def space
-    '\s'
+    add(Character.new(:space))
   end
 
-  [:word, :digit, :space].each do |m|
-    define_method("non#{m}") do
-      m.upcase
+  def any
+    add(Character.new(:any))
+  end
+
+  def anything
+    many(Character.new(:any), 0)
+  end
+
+  def tab
+    add(Character.new(:tab))
+  end
+
+  def line
+    either(Character.new('(?:\n)'), Character.new('(?:\r\n)'))
+  end
+  alias_method :lineBreak, :line
+  alias_method :br, :line
+
+
+  CHARACTERS.each do |character|
+    define_method(character) do
+      add(Character.new(character))
     end
 
-    define_method("#{m}s") do
-      m and multiple
+    define_method("non#{character}") do
+      add(Character.new(character, true))
+    end
+
+    define_method("#{character}s") do
+      many(Character.new(character))
+    end
+
+    define_method("non#{character}s") do
+      many(Character.new(character, true))
     end
   end
 
@@ -40,9 +63,17 @@ class Express
 
   private
 
-  def add(expression, value = nil)
+  def add(expression)
     tap do
-      @expressions << (value ? expression.new(value) : expression.new)
+      @expressions << expression
     end
   end
 end
+
+require_relative "express/character"
+require_relative "express/version"
+require_relative "express/wrapped"
+require_relative "express/value"
+require_relative "express/values"
+require_relative "express/nested"
+require_relative "express/modifier"

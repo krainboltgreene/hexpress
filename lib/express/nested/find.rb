@@ -1,8 +1,8 @@
 class Express
-  # def find(&block)
-  #   add(Find, Express.new.instance_eval(&block))
-  # end
-  # alias_method :capture, :find
+  def find(value = nil, &block)
+    value ? add_value(Nested::Find, value) : add_nested(Nested::Find, &block)
+  end
+  alias_method :capture, :find
 
   module Nested
     class Find

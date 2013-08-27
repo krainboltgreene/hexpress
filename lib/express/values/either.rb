@@ -1,9 +1,10 @@
 class Express
-  # def either(*values)
-  #   add(Either, values)
-  # end
-  # alias_method :and, :either
-  # alias_method :any_of, :either
+  def either(*values)
+    add_value(Values::Either, values)
+  end
+  alias_method :and, :either
+  alias_method :any_of, :either
+  alias_method :anyOf, :either
 
   module Values
     class Either

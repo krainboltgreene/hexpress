@@ -4,15 +4,15 @@ class Express
   end
 
   def lower(value = "a".."z")
-    add(Values::Range, value)
+    add_value(Values::Range, value)
   end
 
   def upper(value = "A".."Z")
-    add(Values::Range, value)
+    add_value(Values::Range, value)
   end
 
   def number(value = 0..9)
-    add(Values::Range, value)
+    add_value(Values::Range, value)
   end
 
   module Values
