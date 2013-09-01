@@ -24,6 +24,10 @@ class Express
     many(Character.new(:any), 0)
   end
 
+  def something
+    many(Character.new(:any), 1)
+  end
+
   def tab
     add(Character.new(:tab))
   end
