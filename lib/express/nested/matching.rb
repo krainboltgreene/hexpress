@@ -2,6 +2,7 @@ class Express
   def matching(&block)
     add_nested(Nested::Matching, &block)
   end
+  alias_method :like, :matching
 
   module Nested
     class Matching
