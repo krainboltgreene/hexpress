@@ -73,8 +73,8 @@ describe "VerbalExpressions" do
   end
 
   describe "#anyOf" do
-    it 'returns `"(?:[f])"`' do
-      expect(expressed(:anyOf, "f")).to eq('"(?:[f])"')
+    it 'returns `(?:[f])`' do
+      expect(expressed(:anyOf, "f")).to eq('(?:[f])')
     end
   end
 
