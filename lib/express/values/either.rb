@@ -8,14 +8,16 @@ class Express
   module Values
     class Either
       include Values
+      include Wrapped
 
       def initialize(*values)
         @values = values
         @delimiter = "|"
+        @open, @close = "(?:", ")"
       end
 
       def to_s
-        "(?:#{values.join(delimiter)})"
+        "#{open}#{values.join(delimiter)}#{close}"
       end
     end
   end
