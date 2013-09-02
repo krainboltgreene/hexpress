@@ -20,8 +20,10 @@ describe Express::Modifier do
   describe "#to_s" do
     class ExampleModifierWithValue
       include Express::Modifier
-      def value
-        "foo"
+      attr_reader :value
+
+      def initialize
+        @value = "foo"
       end
 
       def operator
