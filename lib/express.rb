@@ -35,9 +35,6 @@ class Express
   def line
     either(Character.new('(?:\n)'), Character.new('(?:\r\n)'))
   end
-  alias_method :lineBreak, :line
-  alias_method :br, :line
-
 
   CHARACTERS.each do |character|
     define_method(character) do

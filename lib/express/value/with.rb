@@ -3,7 +3,6 @@ class Express
     add_value(Value::With, value)
   end
   alias_method :has, :with
-  alias_method :then, :with
   alias_method :including, :with
 
   module Value

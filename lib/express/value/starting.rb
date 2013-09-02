@@ -5,7 +5,6 @@ class Express
   alias_method :begins, :starting
   alias_method :begin, :starting
   alias_method :start, :starting
-  alias_method :startOfLine, :starting
 
   module Value
     class Starting

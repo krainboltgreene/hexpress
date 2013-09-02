@@ -4,7 +4,6 @@ class Express
   end
   alias_method :and, :either
   alias_method :any_of, :either
-  alias_method :anyOf, :either
 
   module Values
     class Either
