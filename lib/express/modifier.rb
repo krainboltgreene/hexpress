@@ -13,7 +13,7 @@ class Express
     end
 
     def to_s
-      if respond_to?(:value)
+      if @value
         "#{open}#{value}#{close}#{operator}"
       else
         operator
