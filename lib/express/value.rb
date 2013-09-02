@@ -1,8 +1,8 @@
 class Express
   private
 
-  def add_value(expression, v)
-    add(expression.new(v))
+  def add_value(expression, v, &block)
+    add(expression.new(block_given? ? Express.new.instance_exec(&block) : v))
   end
 
   module Value
