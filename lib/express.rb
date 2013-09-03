@@ -1,37 +1,46 @@
 class Express
   CHARACTERS = [:word, :digit, :space]
-  def initialize
+  def initialize(&block)
     @expressions = []
+    instance_exec(&block) if block_given?
   end
 
+  # Matches \w
   def word
     add(Character.new(:word))
   end
 
+  # Matches \d
   def digit
     add(Character.new(:digit))
   end
 
+  # Matches \s
   def space
     add(Character.new(:space))
   end
 
+  # Matches .
   def any
     add(Character.new(:any))
   end
 
+  # Matches (?:.)*
   def anything
     many(Character.new(:any), 0)
   end
 
+  # Matches (?:.)+
   def something
     many(Character.new(:any), 1)
   end
 
+  # Matches \t
   def tab
     add(Character.new(:tab))
   end
 
+  # Matches (?:(?:\n)|(?:\r\n))
   def line
     either(Character.new('(?:\n)'), Character.new('(?:\r\n)'))
   end
@@ -54,16 +63,20 @@ class Express
     end
   end
 
+  # This method returns the regular expression form of this object.
   def to_r
     Regexp.new(to_s)
   end
 
+  # This method returns the string version of the regexp.
   def to_s
     @expressions.map(&:to_s).join
   end
 
   private
 
+  # This method takes an expression and adds it to the expression queue
+  # while returning the main object.
   def add(expression)
     tap do
       @expressions << expression

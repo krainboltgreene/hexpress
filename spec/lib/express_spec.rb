@@ -1,6 +1,16 @@
 require "spec_helper"
 
 describe Express do
+  it "takes a block and turns into a regex" do
+    pattern = Express.new { find("foo") }
+    expect(pattern.to_r).to eq(/(foo)/)
+  end
+
+  it "takes a chain and turns into a regex" do
+    pattern = Express.new.find("foo")
+    expect(pattern.to_r).to eq(/(foo)/)
+  end
+
   describe "#word" do
     it "returns the word matcher" do
       expect(Express.new.word.to_s).to eq('\w')
