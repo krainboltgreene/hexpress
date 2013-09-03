@@ -20,13 +20,12 @@ Using
 require "express"
 
 pattern = Express.new.
-  starting.
-  with("http").
+  start("http").
   maybe("s").
-  then("://").
+  with("://").
   maybe { words.with(".") }.
   find { matching { [word, "-"] }.multiple }.
-  then(".").
+  has(".").
   either("com", "org").
   maybe("/").
   ending
@@ -37,10 +36,32 @@ After requiring express you'll have access to the Express class, which allows yo
 You can see this pattern by calling either `Express#to_s` or `Express#to_r`:
 
 ``` ruby
-pattern.to_s #=> "^http(?:s)?://(?:\\w+\\.)?([\\w\\-]+)\\.(?:com|org)(?:/)?$"
-pattern.to_r #=> /^http(?:s)?:\/\/(?:\w+\.)?([\w\-]+)\.(?:com|org)(?:\/)?$/
+pattern.to_s #=> "^http(?:s)?://(?:(?:\\w)+\\.)?([\\w\\-]+)\\.(?:com|org)(?:/)?$"
+pattern.to_r #=> /^http(?:s)?:\/\/(?:(?:\w)+\.)?([\w\-]+)\.(?:com|org)(?:\/)?$/
 ```
 
+You can also get access to a global method by doing the following (automatically done in any rails application):
+
+``` ruby
+require_relative "express/main"
+
+exp.start("http").maybe("s")
+
+exp do
+  start("http")
+  maybe("s")
+end
+```
+
+In addition we've bundled an extra set of helpers for specific use cases like the web:
+
+``` ruby
+require "express"
+require "express/web"
+
+pattern = exp.http.domain("amazon").tld("com")
+pattern = exp.ftp # ...
+```
 
 Installing
 ==========
