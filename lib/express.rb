@@ -78,3 +78,7 @@ require_relative "express/value"
 require_relative "express/values"
 require_relative "express/nested"
 require_relative "express/modifier"
+
+if defined?(Rails)
+  require_relative "express/main"
+end
