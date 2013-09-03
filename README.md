@@ -19,6 +19,8 @@ Using
 ``` ruby
 require "express"
 
+pattern = Express.new
+
 pattern = Express.new.
   start("http").
   maybe("s").
