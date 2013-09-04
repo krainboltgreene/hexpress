@@ -7,9 +7,6 @@ Hexpress
   - [![Dependency Status](https://gemnasium.com/krainboltgreene/hexpress.png)](https://gemnasium.com/krainboltgreene/hexpress)
   - [![Coverage Status](https://coveralls.io/repos/krainboltgreene/hexpress/badge.png?branch=master)](https://coveralls.io/r/krainboltgreene/hexpress)
 
-
-**NOTE**: This is not the [bvision/hexpress](https://github.com/bvision/hexpress) for slim rails packages!
-
 The hexpress gem is another take at the concept of ["Verbal Hexpressions"]() in Ruby.
 
 
@@ -64,6 +61,16 @@ require "hexpress/web"
 pattern = hexp.http.domain("amazon").tld("com")
 pattern = hexp.ftp # ...
 ```
+
+You can even do advanced composure of multiple patterns:
+
+``` ruby
+protocol = exp.start("http").maybe("s").with("://")
+tld = exp.then(".").either("org", "com", "net")
+link = exp.has(protocol).find { words }.including(tld)
+```
+
+Hexpressions are very flexible.
 
 Installing
 ==========
