@@ -1,5 +1,6 @@
 require "hexpress"
 
-def hexp(&block)
+def hex(&block)
   Hexpress.new(&block)
 end
+alias_method :hexp, :hex
