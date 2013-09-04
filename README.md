@@ -3,7 +3,7 @@ Hexpress
 
   - [![Gem Version](https://badge.fury.io/rb/hexpress.png)](https://rubygems.org/gems/hexpress)
   - [![Code Climate](https://codeclimate.com/github/krainboltgreene/hexpress.png)](https://codeclimate.com/github/krainboltgreene/hexpress)
-  - [![Build Status](https://travis-ci.org/krainboltgreene/hexpress.png)](https://travis-ci.org/krainboltgreene/hexpress)
+  - [![Build Status](https://travis-ci.org/krainboltgreene/hexpress.png?branch=master)](https://travis-ci.org/krainboltgreene/hexpress)
   - [![Dependency Status](https://gemnasium.com/krainboltgreene/hexpress.png)](https://gemnasium.com/krainboltgreene/hexpress)
   - [![Coverage Status](https://coveralls.io/repos/krainboltgreene/hexpress/badge.png?branch=master)](https://coveralls.io/r/krainboltgreene/hexpress)
 
