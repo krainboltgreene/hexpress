@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=640" />
+
+    <link rel="stylesheet" href="stylesheets/core.css" media="screen"/>
+    <link rel="stylesheet" href="stylesheets/mobile.css" media="handheld, only screen and (max-device-width:640px)"/>
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css"/>
+
+    <script type="text/javascript" src="javascripts/modernizr.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script type="text/javascript" src="javascripts/headsmart.min.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function () {
+        $('#main_content').headsmart()
+      })
+    </script>
+    <title>Hexpress by krainboltgreene</title>
+  </head>
+
+  <body>
+    <a id="forkme_banner" href="https://github.com/krainboltgreene/hexpress">View on GitHub</a>
+    <div class="shell">
+
+      <header>
+        <span class="ribbon-outer">
+          <span class="ribbon-inner">
+            <h1>Hexpress</h1>
+            <h2>Human Expressions, a human way to define regular expressions</h2>
+          </span>
+          <span class="left-tail"></span>
+          <span class="right-tail"></span>
+        </span>
+      </header>
+
+      <section id="downloads">
+        <span class="inner">
+          <a href="https://github.com/krainboltgreene/hexpress/zipball/master" class="zip"><em>download</em> .ZIP</a><a href="https://github.com/krainboltgreene/hexpress/tarball/master" class="tgz"><em>download</em> .TGZ</a>
+        </span>
+      </section>
+
+
+      <span class="banner-fix"></span>
+
+
+      <section id="main_content">
+        <ul>
+<li><a href="https://rubygems.org/gems/hexpress"><img src="https://badge.fury.io/rb/hexpress.png" alt="Gem Version"></a></li>
+<li><a href="https://codeclimate.com/github/krainboltgreene/hexpress"><img src="https://codeclimate.com/github/krainboltgreene/hexpress.png" alt="Code Climate"></a></li>
+<li><a href="https://travis-ci.org/krainboltgreene/hexpress"><img src="https://travis-ci.org/krainboltgreene/hexpress.png?branch=master" alt="Build Status"></a></li>
+<li><a href="https://gemnasium.com/krainboltgreene/hexpress"><img src="https://gemnasium.com/krainboltgreene/hexpress.png" alt="Dependency Status"></a></li>
+<li><a href="https://coveralls.io/r/krainboltgreene/hexpress"><img src="https://coveralls.io/repos/krainboltgreene/hexpress/badge.png?branch=master" alt="Coverage Status"></a></li>
+</ul><p><strong>NOTE</strong>: This is not the <a href="https://github.com/bvision/hexpress">bvision/hexpress</a> for slim rails packages!</p>
+
+<p>The hexpress gem is another take at the concept of <a href="">"Verbal Hexpressions"</a> in Ruby.</p>
+
+<h1>
+<a name="using" class="anchor" href="#using"><span class="octicon octicon-link"></span></a>Using</h1>
+
+<div class="highlight"><pre><span class="nb">require</span> <span class="s2">"hexpress"</span>
+
+<span class="n">pattern</span> <span class="o">=</span> <span class="no">Hexpress</span><span class="o">.</span><span class="n">new</span>
+
+<span class="n">pattern</span> <span class="o">=</span> <span class="no">Hexpress</span><span class="o">.</span><span class="n">new</span><span class="o">.</span>
+  <span class="n">start</span><span class="p">(</span><span class="s2">"http"</span><span class="p">)</span><span class="o">.</span>
+  <span class="n">maybe</span><span class="p">(</span><span class="s2">"s"</span><span class="p">)</span><span class="o">.</span>
+  <span class="n">with</span><span class="p">(</span><span class="s2">"://"</span><span class="p">)</span><span class="o">.</span>
+  <span class="n">maybe</span> <span class="p">{</span> <span class="n">words</span><span class="o">.</span><span class="n">with</span><span class="p">(</span><span class="s2">"."</span><span class="p">)</span> <span class="p">}</span><span class="o">.</span>
+  <span class="n">find</span> <span class="p">{</span> <span class="n">matching</span> <span class="p">{</span> <span class="o">[</span><span class="n">word</span><span class="p">,</span> <span class="s2">"-"</span><span class="o">]</span> <span class="p">}</span><span class="o">.</span><span class="n">multiple</span> <span class="p">}</span><span class="o">.</span>
+  <span class="n">has</span><span class="p">(</span><span class="s2">"."</span><span class="p">)</span><span class="o">.</span>
+  <span class="n">either</span><span class="p">(</span><span class="s2">"com"</span><span class="p">,</span> <span class="s2">"org"</span><span class="p">)</span><span class="o">.</span>
+  <span class="n">maybe</span><span class="p">(</span><span class="s2">"/"</span><span class="p">)</span><span class="o">.</span>
+  <span class="n">ending</span>
+</pre></div>
+
+<p>After requiring hexpress you'll have access to the Hexpress class, which allows you to chain methods to build up a regex pattern.</p>
+
+<p>You can see this pattern by calling either <code>Hexpress#to_s</code> or <code>Hexpress#to_r</code>:</p>
+
+<div class="highlight"><pre><span class="n">pattern</span><span class="o">.</span><span class="n">to_s</span> <span class="c1">#=&gt; "^http(?:s)?://(?:(?:\\w)+\\.)?([\\w\\-]+)\\.(?:com|org)(?:/)?$"</span>
+<span class="n">pattern</span><span class="o">.</span><span class="n">to_r</span> <span class="c1">#=&gt; /^http(?:s)?:\/\/(?:(?:\w)+\.)?([\w\-]+)\.(?:com|org)(?:\/)?$/</span>
+</pre></div>
+
+<p>You can also get access to a global method by doing the following (automatically done in any rails application):</p>
+
+<div class="highlight"><pre><span class="n">require_relative</span> <span class="s2">"hexpress/main"</span>
+
+<span class="n">hexp</span><span class="o">.</span><span class="n">start</span><span class="p">(</span><span class="s2">"http"</span><span class="p">)</span><span class="o">.</span><span class="n">maybe</span><span class="p">(</span><span class="s2">"s"</span><span class="p">)</span>
+
+<span class="n">hexp</span> <span class="k">do</span>
+  <span class="n">start</span><span class="p">(</span><span class="s2">"http"</span><span class="p">)</span>
+  <span class="n">maybe</span><span class="p">(</span><span class="s2">"s"</span><span class="p">)</span>
+<span class="k">end</span>
+</pre></div>
+
+<p>In addition we've bundled an extra set of helpers for specific use cases like the web:</p>
+
+<div class="highlight"><pre><span class="nb">require</span> <span class="s2">"hexpress"</span>
+<span class="nb">require</span> <span class="s2">"hexpress/web"</span>
+
+<span class="n">pattern</span> <span class="o">=</span> <span class="n">hexp</span><span class="o">.</span><span class="n">http</span><span class="o">.</span><span class="n">domain</span><span class="p">(</span><span class="s2">"amazon"</span><span class="p">)</span><span class="o">.</span><span class="n">tld</span><span class="p">(</span><span class="s2">"com"</span><span class="p">)</span>
+<span class="n">pattern</span> <span class="o">=</span> <span class="n">hexp</span><span class="o">.</span><span class="n">ftp</span> <span class="c1"># ...</span>
+</pre></div>
+
+<h1>
+<a name="installing" class="anchor" href="#installing"><span class="octicon octicon-link"></span></a>Installing</h1>
+
+<p>Add this line to your application's Gemfile:</p>
+
+<pre><code>gem "hexpress", "~&gt; 1.0"
+</code></pre>
+
+<p>And then execute:</p>
+
+<pre><code>$ bundle
+</code></pre>
+
+<p>Or install it yourself as:</p>
+
+<pre><code>$ gem install hexpress
+</code></pre>
+
+<h1>
+<a name="contributing" class="anchor" href="#contributing"><span class="octicon octicon-link"></span></a>Contributing</h1>
+
+<ol>
+<li>Fork it</li>
+<li>Create your feature branch (<code>git checkout -b my-new-feature</code>)</li>
+<li>Commit your changes (<code>git commit -am 'Add some feature'</code>)</li>
+<li>Push to the branch (<code>git push origin my-new-feature</code>)</li>
+<li>Create new Pull Request</li>
+</ol><h1>
+<a name="licensing" class="anchor" href="#licensing"><span class="octicon octicon-link"></span></a>Licensing</h1>
+
+<p>Copyright (c) 2013 Kurtis Rainbolt-Greene</p>
+
+<p>MIT License</p>
+
+<p>Permission is hereby granted, free of charge, to any person obtaining
+a copy of this software and associated documentation files (the
+"Software"), to deal in the Software without restriction, including
+without limitation the rights to use, copy, modify, merge, publish,
+distribute, sublicense, and/or sell copies of the Software, and to
+permit persons to whom the Software is furnished to do so, subject to
+the following conditions:</p>
+
+<p>The above copyright notice and this permission notice shall be
+included in all copies or substantial portions of the Software.</p>
+
+<p>THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
+OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
+WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</p>
+      </section>
+
+      <footer>
+        <span class="ribbon-outer">
+          <span class="ribbon-inner">
+            <p>this project by <a href="https://github.com/krainboltgreene">krainboltgreene</a> can be found on <a href="https://github.com/krainboltgreene/hexpress">GitHub</a></p>
+          </span>
+          <span class="left-tail"></span>
+          <span class="right-tail"></span>
+        </span>
+        <p>Generated with <a href="http://pages.github.com">GitHub Pages</a> using Merlot</p>
+        <span class="octocat"></span>
+      </footer>
+
+    </div>
+
+    
+  </body>
+</html>
