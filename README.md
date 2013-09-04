@@ -1,27 +1,27 @@
-Express
+Hexpress
 -------
 
-  - [![Gem Version](https://badge.fury.io/rb/express.png)](https://rubygems.org/gems/express)
-  - [![Code Climate](https://codeclimate.com/github/krainboltgreene/express.png)](https://codeclimate.com/github/krainboltgreene/express)
-  - [![Build Status](https://travis-ci.org/krainboltgreene/express.png)](https://travis-ci.org/krainboltgreene/express)
-  - [![Dependency Status](https://gemnasium.com/krainboltgreene/express.png)](https://gemnasium.com/krainboltgreene/express)
-  - [![Coverage Status](https://coveralls.io/repos/krainboltgreene/express/badge.png?branch=master)](https://coveralls.io/r/krainboltgreene/express)
+  - [![Gem Version](https://badge.fury.io/rb/hexpress.png)](https://rubygems.org/gems/hexpress)
+  - [![Code Climate](https://codeclimate.com/github/krainboltgreene/hexpress.png)](https://codeclimate.com/github/krainboltgreene/hexpress)
+  - [![Build Status](https://travis-ci.org/krainboltgreene/hexpress.png)](https://travis-ci.org/krainboltgreene/hexpress)
+  - [![Dependency Status](https://gemnasium.com/krainboltgreene/hexpress.png)](https://gemnasium.com/krainboltgreene/hexpress)
+  - [![Coverage Status](https://coveralls.io/repos/krainboltgreene/hexpress/badge.png?branch=master)](https://coveralls.io/r/krainboltgreene/hexpress)
 
 
-**NOTE**: This is not the [bvision/express](https://github.com/bvision/express) for slim rails packages!
+**NOTE**: This is not the [bvision/hexpress](https://github.com/bvision/hexpress) for slim rails packages!
 
-The express gem is another take at the concept of ["Verbal Expressions"]() in Ruby.
+The hexpress gem is another take at the concept of ["Verbal Hexpressions"]() in Ruby.
 
 
 Using
 =====
 
 ``` ruby
-require "express"
+require "hexpress"
 
-pattern = Express.new
+pattern = Hexpress.new
 
-pattern = Express.new.
+pattern = Hexpress.new.
   start("http").
   maybe("s").
   with("://").
@@ -33,9 +33,9 @@ pattern = Express.new.
   ending
 ```
 
-After requiring express you'll have access to the Express class, which allows you to chain methods to build up a regex pattern.
+After requiring hexpress you'll have access to the Hexpress class, which allows you to chain methods to build up a regex pattern.
 
-You can see this pattern by calling either `Express#to_s` or `Express#to_r`:
+You can see this pattern by calling either `Hexpress#to_s` or `Hexpress#to_r`:
 
 ``` ruby
 pattern.to_s #=> "^http(?:s)?://(?:(?:\\w)+\\.)?([\\w\\-]+)\\.(?:com|org)(?:/)?$"
@@ -45,11 +45,11 @@ pattern.to_r #=> /^http(?:s)?:\/\/(?:(?:\w)+\.)?([\w\-]+)\.(?:com|org)(?:\/)?$/
 You can also get access to a global method by doing the following (automatically done in any rails application):
 
 ``` ruby
-require_relative "express/main"
+require_relative "hexpress/main"
 
-exp.start("http").maybe("s")
+hexp.start("http").maybe("s")
 
-exp do
+hexp do
   start("http")
   maybe("s")
 end
@@ -58,11 +58,11 @@ end
 In addition we've bundled an extra set of helpers for specific use cases like the web:
 
 ``` ruby
-require "express"
-require "express/web"
+require "hexpress"
+require "hexpress/web"
 
-pattern = exp.http.domain("amazon").tld("com")
-pattern = exp.ftp # ...
+pattern = hexp.http.domain("amazon").tld("com")
+pattern = hexp.ftp # ...
 ```
 
 Installing
@@ -70,7 +70,7 @@ Installing
 
 Add this line to your application's Gemfile:
 
-    gem "express", "~> 1.0"
+    gem "hexpress", "~> 1.0"
 
 And then execute:
 
@@ -78,7 +78,7 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install express
+    $ gem install hexpress
 
 
 Contributing
