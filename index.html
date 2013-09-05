@@ -52,9 +52,7 @@
 <li><a href="https://travis-ci.org/krainboltgreene/hexpress"><img src="https://travis-ci.org/krainboltgreene/hexpress.png?branch=master" alt="Build Status"></a></li>
 <li><a href="https://gemnasium.com/krainboltgreene/hexpress"><img src="https://gemnasium.com/krainboltgreene/hexpress.png" alt="Dependency Status"></a></li>
 <li><a href="https://coveralls.io/r/krainboltgreene/hexpress"><img src="https://coveralls.io/repos/krainboltgreene/hexpress/badge.png?branch=master" alt="Coverage Status"></a></li>
-</ul><p><strong>NOTE</strong>: This is not the <a href="https://github.com/bvision/hexpress">bvision/hexpress</a> for slim rails packages!</p>
-
-<p>The hexpress gem is another take at the concept of <a href="">"Verbal Hexpressions"</a> in Ruby.</p>
+</ul><p>The hexpress gem is another take at the concept of <a href="">"Verbal Hexpressions"</a> in Ruby.</p>
 
 <h1>
 <a name="using" class="anchor" href="#using"><span class="octicon octicon-link"></span></a>Using</h1>
@@ -103,6 +101,23 @@
 <span class="n">pattern</span> <span class="o">=</span> <span class="n">hexp</span><span class="o">.</span><span class="n">http</span><span class="o">.</span><span class="n">domain</span><span class="p">(</span><span class="s2">"amazon"</span><span class="p">)</span><span class="o">.</span><span class="n">tld</span><span class="p">(</span><span class="s2">"com"</span><span class="p">)</span>
 <span class="n">pattern</span> <span class="o">=</span> <span class="n">hexp</span><span class="o">.</span><span class="n">ftp</span> <span class="c1"># ...</span>
 </pre></div>
+
+<p>You can even do advanced composure of multiple patterns:</p>
+
+<div class="highlight"><pre><span class="n">protocol</span> <span class="o">=</span> <span class="n">exp</span><span class="o">.</span><span class="n">start</span><span class="p">(</span><span class="s2">"http"</span><span class="p">)</span><span class="o">.</span><span class="n">maybe</span><span class="p">(</span><span class="s2">"s"</span><span class="p">)</span><span class="o">.</span><span class="n">with</span><span class="p">(</span><span class="s2">"://"</span><span class="p">)</span>
+<span class="n">tld</span> <span class="o">=</span> <span class="n">exp</span><span class="o">.</span><span class="n">then</span><span class="p">(</span><span class="s2">"."</span><span class="p">)</span><span class="o">.</span><span class="n">either</span><span class="p">(</span><span class="s2">"org"</span><span class="p">,</span> <span class="s2">"com"</span><span class="p">,</span> <span class="s2">"net"</span><span class="p">)</span>
+<span class="n">link</span> <span class="o">=</span> <span class="n">exp</span><span class="o">.</span><span class="n">has</span><span class="p">(</span><span class="n">protocol</span><span class="p">)</span><span class="o">.</span><span class="n">find</span> <span class="p">{</span> <span class="n">words</span> <span class="p">}</span><span class="o">.</span><span class="n">including</span><span class="p">(</span><span class="n">tld</span><span class="p">)</span>
+</pre></div>
+
+<p>It's also entirely feasible to compound two or more patterns together:</p>
+
+<div class="highlight"><pre><span class="n">protocol</span> <span class="o">=</span> <span class="n">exp</span><span class="o">.</span><span class="n">start</span><span class="p">(</span><span class="s2">"http"</span><span class="p">)</span><span class="o">.</span><span class="n">maybe</span><span class="p">(</span><span class="s2">"s"</span><span class="p">)</span><span class="o">.</span><span class="n">with</span><span class="p">(</span><span class="s2">"://"</span><span class="p">)</span>
+<span class="n">domain</span> <span class="o">=</span> <span class="n">exp</span><span class="o">.</span><span class="n">find</span> <span class="p">{</span> <span class="n">words</span> <span class="p">}</span>
+<span class="n">tld</span> <span class="o">=</span> <span class="n">exp</span><span class="o">.</span><span class="n">then</span><span class="p">(</span><span class="s2">"."</span><span class="p">)</span><span class="o">.</span><span class="n">either</span><span class="p">(</span><span class="s2">"org"</span><span class="p">,</span> <span class="s2">"com"</span><span class="p">,</span> <span class="s2">"net"</span><span class="p">)</span>
+<span class="n">link</span> <span class="o">=</span>  <span class="n">protocol</span> <span class="o">+</span> <span class="n">domain</span> <span class="o">+</span> <span class="n">tld</span>
+</pre></div>
+
+<p>Hexpressions are very flexible.</p>
 
 <h1>
 <a name="installing" class="anchor" href="#installing"><span class="octicon octicon-link"></span></a>Installing</h1>
