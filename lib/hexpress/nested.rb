@@ -1,9 +1,9 @@
 class Hexpress
   private
 
-  def add_nested(hexpression, &block)
+  def add_nested(expression, &block)
     tap do
-      @hexpressions << hexpression.new(&block)
+      @expressions << expression.new(&block)
     end
   end
 

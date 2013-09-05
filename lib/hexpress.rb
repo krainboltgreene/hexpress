@@ -70,16 +70,16 @@ class Hexpress
 
   # This method returns the string version of the regexp.
   def to_s
-    @hexpressions.map(&:to_s).join
+    @expressions.map(&:to_s).join
   end
 
   private
 
   # This method takes an hexpression and adds it to the hexpression queue
   # while returning the main object.
-  def add(hexpression)
+  def add(expression)
     tap do
-      @hexpressions << hexpression
+      @expressions << expression
     end
   end
 end
