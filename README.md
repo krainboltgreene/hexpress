@@ -70,6 +70,15 @@ tld = exp.then(".").either("org", "com", "net")
 link = exp.has(protocol).find { words }.including(tld)
 ```
 
+It's also entirely feasible to compound two or more patterns together:
+
+``` ruby
+protocol = exp.start("http").maybe("s").with("://")
+domain = exp.find { words }
+tld = exp.then(".").either("org", "com", "net")
+link =  protocol + domain + tld
+```
+
 Hexpressions are very flexible.
 
 Installing
