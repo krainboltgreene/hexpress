@@ -1,7 +1,9 @@
 class Hexpress
   CHARACTERS = [:word, :digit, :space]
-  def initialize(&block)
-    @hexpressions = []
+  attr_reader :expressions
+
+  def initialize(*expressions, &block)
+    @expressions = expressions
     instance_exec(&block) if block_given?
   end
 
@@ -71,6 +73,12 @@ class Hexpress
   # This method returns the string version of the regexp.
   def to_s
     @expressions.map(&:to_s).join
+  end
+
+  # Takes an expression and returns the combination of the two expressions
+  # in a new Hexpress object.
+  def +(expression)
+    Hexpress.new(*expressions + expression.expressions)
   end
 
   private

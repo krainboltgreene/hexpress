@@ -1,6 +1,12 @@
 require "spec_helper"
 
 describe Hexpress do
+  it "takes a list of expressions and turns them into a regex" do
+    expressions = [Hexpress::Value::With.new("foo"), Hexpress::Value::With.new("bar")]
+    pattern = Hexpress.new(*expressions)
+    expect(pattern.to_r).to eq(/foobar/)
+  end
+
   it "takes a block and turns into a regex" do
     pattern = Hexpress.new { find("foo") }
     expect(pattern.to_r).to eq(/(foo)/)
@@ -68,6 +74,16 @@ describe Hexpress do
   describe "#anything" do
     it "returns any with zero or more pattern wrapped in noncapute" do
       expect(Hexpress.new.anything.to_s).to eq('(?:.)*')
+    end
+  end
+
+  describe "#+" do
+    it "returns a combination of any number of expressions" do
+      pattern1 = Hexpress.new.with("foo")
+      pattern2 = Hexpress.new.with("bar")
+      pattern3 = Hexpress.new.with("bang")
+      pattern4 = pattern1 + pattern2 + pattern3
+      expect(pattern4.to_r).to eq(/foobarbang/)
     end
   end
 end
