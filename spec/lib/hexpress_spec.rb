@@ -86,4 +86,32 @@ describe Hexpress do
       expect(pattern4.to_r).to eq(/foobarbang/)
     end
   end
+
+  describe "#to_regexp" do
+    it "should return a Regexp object" do
+      expect(Hexpress.new.to_regexp).to be_a(Regexp)
+    end
+  end
+
+  describe "acts as a Regexp" do
+    it "should work for Regexp#try_convert" do
+      expect(Regexp.try_convert(Hexpress.new)).not_to be_nil
+    end
+
+    it "should be able to match" do
+      expect(Hexpress.new.with("foo").match("foo")).to_not be_nil
+    end
+
+    it "should match using #=~" do
+      expect(Hexpress.new.with("foo") =~ "foo").to eq(0)
+    end
+
+    it "should match using ===" do
+      expect(Hexpress.new.with("foo") === "foo").to be_true
+    end
+
+    it "should be able to be matched by strings using =~" do
+      expect("foo" =~ Hexpress.new.with("foo")).to be_true
+    end
+  end
 end
