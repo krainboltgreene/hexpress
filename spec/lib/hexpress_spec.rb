@@ -89,29 +89,29 @@ describe Hexpress do
 
   describe "#to_regexp" do
     it "should return a Regexp object" do
-      Hexpress.new.to_regexp.should be_a(Regexp)
+      expect(Hexpress.new.to_regexp).to be_a(Regexp)
     end
   end
 
   describe "acts as a Regexp" do
     it "should work for Regexp#try_convert" do
-      Regexp.try_convert(Hexpress.new).should_not be_nil
+      expect(Regexp.try_convert(Hexpress.new)).not_to be_nil
     end
 
     it "should be able to match" do
-      Hexpress.new.with("foo").match("foo").should_not be_nil
+      expect(Hexpress.new.with("foo").match("foo")).to_not be_nil
     end
 
     it "should match using #=~" do
-      (Hexpress.new.with("foo") =~ "foo").should eq(0)
+      expect(Hexpress.new.with("foo") =~ "foo").to eq(0)
     end
 
     it "should match using ===" do
-      (Hexpress.new.with("foo") === "foo").should be_true
+      expect(Hexpress.new.with("foo") === "foo").to be_true
     end
 
     it "should be able to be matched by strings using =~" do
-      ("foo" =~ Hexpress.new.with("foo")).should be_true
+      expect("foo" =~ Hexpress.new.with("foo")).to be_true
     end
   end
 end
