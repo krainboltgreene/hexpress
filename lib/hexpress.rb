@@ -1,4 +1,7 @@
 class Hexpress
+  extend Forwardable
+  def_delegators :to_regexp, :=~, :===, :match
+
   CHARACTERS = [:word, :digit, :space]
   attr_reader :expressions
 
