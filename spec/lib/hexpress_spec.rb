@@ -86,4 +86,14 @@ describe Hexpress do
       expect(pattern4.to_r).to eq(/foobarbang/)
     end
   end
+
+  describe "#to_regexp" do
+    it "should return a Regexp object" do
+      Hexpress.new.to_regexp.should be_a(Regexp)
+    end
+
+    it "should work for Regexp#try_convert" do
+      Regexp.try_convert(Hexpress.new).should_not be_nil
+    end
+  end
 end
