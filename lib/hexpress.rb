@@ -1,4 +1,7 @@
 class Hexpress
+  extend Forwardable
+  def_delegators :to_regexp, :=~, :===, :match
+
   CHARACTERS = [:word, :digit, :space]
   attr_reader :expressions
 
@@ -66,9 +69,10 @@ class Hexpress
   end
 
   # This method returns the regular hexpression form of this object.
-  def to_r
+  def to_regexp
     Regexp.new(to_s)
   end
+  alias_method :to_r, :to_regexp
 
   # This method returns the string version of the regexp.
   def to_s
