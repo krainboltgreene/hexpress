@@ -1,5 +1,9 @@
 class Hexpress
   module Web
+    def email
+      nonspaces.with('@').nonspaces.with('.').nonspaces
+    end
+
     def http
       start("http").maybe("s").protocol
     end
