@@ -1,28 +1,15 @@
 class Hexpress
-  private
-
-  def add_value(hexpression, v, &block)
-    add(hexpression.new(block_given? ? Hexpress.new.instance_exec(&block) : v))
-  end
-
   module Value
+    def initialize(value = nil)
+      @value = value
+    end
+
     def value
-      if escapable? then escaped_value else @value end || ""
+      Regexp.escape(@value || "")
     end
 
-    private
-
-    def escapable?
-      @value.respond_to?(:gsub)
-    end
-
-    def escaped_value
-      Regexp.escape(@value)
+    def to_s
+      "#{value}"
     end
   end
 end
-
-require_relative "value/ending"
-require_relative "value/except"
-require_relative "value/starting"
-require_relative "value/with"

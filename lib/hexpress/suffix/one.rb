@@ -1,14 +1,14 @@
 class Hexpress
   def one(value = nil, &block)
-    add_value(Modifier::One, value, &block)
+    add_value(Suffix::One, value, &block)
   end
   alias_method :maybe, :one
   alias_method :possibly, :one
 
-  module Modifier
+  module Suffix
     class One
       include Value
-      include Modifier
+      include Suffix
 
       def initialize(value)
         @value = value

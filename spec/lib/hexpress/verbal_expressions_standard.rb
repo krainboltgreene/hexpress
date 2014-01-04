@@ -1,7 +1,7 @@
 require "spec_helper"
-require "hexpress/verbal_hexpressions"
+require "hexpress/verbal_expressions"
 
-describe "VerbalHexpressions" do
+describe "VerbalExpressions" do
   def hexpressed(method, *arguments)
     Hexpress.new.send(method, *arguments).to_s
   end

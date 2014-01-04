@@ -16,12 +16,46 @@ class Hexpress
       with("://")
     end
 
+    def subdomain(name = nil)
+      name ? words : with(name)
+      with(".")
+    end
+
+    def subdomain?(name = nil)
+      maybe { subdomain(name) }
+    end
+
+    def subdomains(*names)
+      either(*names).with(".")
+    end
+
     def domain(name)
-      maybe { words.with(".") }.find(name)
+      find(name)
     end
 
     def tld(name)
-      has(".").with(name).maybe("/")
+      has(".").with(name)
+    end
+
+    def tlds(*names)
+      has(".").either(*names)
+    end
+
+    def resource(name = nil)
+      has("/")
+      name ? anything : find(name)
+    end
+
+    def resources(*names)
+      has("/").either(*names)
+    end
+
+    def query
+      has("?").find { something }
+    end
+
+    def hash
+      has("#").find { something }.ending
     end
 
     def ftp
@@ -34,10 +68,6 @@ class Hexpress
 
     def ftps_only
       start("ftps").protocol
-    end
-
-    def path
-      has("/").anything.maybe.maybe("?")
     end
   end
 

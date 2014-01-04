@@ -1,12 +1,6 @@
 class Hexpress
   private
 
-  def add_nested(expression, &block)
-    tap do
-      @expressions << expression.new(&block)
-    end
-  end
-
   module Nested
     include Wrapped
 

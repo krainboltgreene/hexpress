@@ -1,12 +1,12 @@
 class Hexpress
   extend Forwardable
-  def_delegators :to_regexp, :=~, :===, :match
+  def_delegators :to_regexp, :=~, :===, :==, :match
 
   CHARACTERS = [:word, :digit, :space]
-  attr_reader :expressions
+  attr_reader :hexen
 
-  def initialize(*expressions, &block)
-    @expressions = expressions
+  def initialize(*hexen, &block)
+    @hexen = hexen
     instance_exec(&block) if block_given?
   end
 
@@ -87,22 +87,29 @@ class Hexpress
 
   private
 
-  # This method takes an hexpression and adds it to the hexpression queue
+  # This method takes an hex and adds it to the hexen queue
   # while returning the main object.
-  def add(expression)
-    tap do
-      @expressions << expression
-    end
+  def add(hex)
+    tap { @expressions << hex }
+  end
+
+  def add_value(hex, value, &block)
+    add(hex.new(block_given? ? Hexpress.new.instance_exec(&block) : value))
+  end
+
+  def add_nested(hex, &block)
+    add(hex.new(&block))
   end
 end
 
 require_relative "hexpress/character"
 require_relative "hexpress/version"
-require_relative "hexpress/wrapped"
 require_relative "hexpress/value"
-require_relative "hexpress/values"
-require_relative "hexpress/nested"
-require_relative "hexpress/modifier"
+require_relative "hexpress/suffix"
+require_relative "hexpress/prefix"
+require_relative "hexpress/wrapped"
+require_relative "hexpress/noncapture"
+require_relative "hexpress/many"
 
 if defined?(Rails)
   require_relative "hexpress/main"
