@@ -1,4 +1,5 @@
 require "spec_helper"
+require "hexpress/value/except"
 
 describe Hexpress::Value::Except do
   describe "#to_s" do

@@ -1,4 +1,5 @@
 require "spec_helper"
+require "hexpress/value/ending"
 
 describe Hexpress::Value::Ending do
   describe "#to_s" do

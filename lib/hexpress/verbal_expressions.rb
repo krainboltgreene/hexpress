@@ -1,4 +1,7 @@
 require "hexpress"
+require "hexpress/value/starting"
+require "hexpress/value/with"
+require "hexpress/values/either"
 
 class Hexpress
   alias_method :startOfLine, :starting

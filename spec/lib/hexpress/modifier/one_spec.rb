@@ -1,6 +1,7 @@
 require "spec_helper"
+require "hexpress/suffix/one"
 
-describe Hexpress::Modifier::One do
+describe Hexpress::Suffix::One do
   describe "#maybe" do
     it 'returns `(?:\w+)?`' do
       regex = Hexpress.new.maybe { words }.to_r

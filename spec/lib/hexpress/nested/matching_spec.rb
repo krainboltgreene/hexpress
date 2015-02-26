@@ -1,4 +1,5 @@
 require "spec_helper"
+require "hexpress/nested/matching"
 
 describe Hexpress::Nested::Matching do
   describe "#hexpression" do

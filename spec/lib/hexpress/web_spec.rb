@@ -20,12 +20,10 @@ describe Hexpress::Web do
     end
   end
 
-  describe "#http_only" do do
+  describe "#http_only" do
     it "matches /^http:\/\//" do
       expect(pattern(:http_only)).to eq(/^http:\/\//)
     end
-  end
-
   end
 
   describe "#protocol" do
