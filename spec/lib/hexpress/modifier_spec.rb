@@ -1,4 +1,5 @@
 require "spec_helper"
+require "hexpress/verbal_expressions"
 
 describe Hexpress::Modifier do
   class ExampleModifier

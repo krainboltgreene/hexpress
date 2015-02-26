@@ -1,4 +1,5 @@
 require "spec_helper"
+require_relative "../modifier_spec"
 
 describe Hexpress::Modifier::Many do
   describe "#operator" do

@@ -1,4 +1,5 @@
 require "spec_helper"
+require "hexpress/values/range"
 
 describe Hexpress::Values::Range do
   describe "#lower" do
